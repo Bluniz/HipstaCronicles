@@ -1,14 +1,15 @@
 class Personagem {
   constructor(imagem){
   this.imagem = imagem;
-  this.matriz = []
+  this.matriz = [];
+  this.frameAtual = 0;
 
      let matrizValorEixoX = 0;
      let matrizValorEixoY = 0;
      let counter = 0;
 
      for(var i = 0; i < 16; i++){
-     
+ 
      /*Os valores do eixo Y se repetem até 4 vezes,
      portanto sempre que o contador resetar é incrementado +270 que        em um loop de 16x a cada 4 posições do vetor o valor será            incrementado!Ex: 0-3:0, 4-7:270, 8-11:540, 12-15:810 */ 
      if(counter == 4){
@@ -24,8 +25,7 @@ class Personagem {
      this.matriz[i] = [matrizValorEixoX, matrizValorEixoY];
       
     }
-  
-    this.frameAtual = 0;
+
   }
   
   exibe(){
