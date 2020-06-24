@@ -11,6 +11,11 @@ class Cenario {
     image(this.imagem, this.x2, 0, width, height);
   }
   
+  exibe2(){
+  image(this.imagem, this.x1, 0, 100, 100); 
+  image(this.imagem, this.x2, 0, 100, 100);
+  }
+  
   move(){
     this.x1 = this.x1 - this.velocidade;
     this.x2 = this.x2 - this.velocidade;  

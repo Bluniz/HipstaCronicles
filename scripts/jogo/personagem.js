@@ -1,64 +1,52 @@
-class Personagem {
-  constructor(imagem){
-  this.imagem = imagem;
-  this.matriz = [];
-  this.frameAtual = 0;
+class Personagem extends Animacao{
+  constructor(matriz, imagem, x, largura, altura,                 larguraSprite, alturaSprite){
+     super(matriz, imagem, x, largura, altura,                 larguraSprite, alturaSprite);
+    
+    this.yInicial = height - this.altura;
+    this.y = this.yInicial;
+    
+    this.velocidadeDoPulo = 0;
+    this.gravidade = 3;
+    
+    this.counterPulo = 0;
+  }
+  
+  
+  pula(){
+    
+      this.counterPulo++;
+      if(this.counterPulo <= 2){
+        this.velocidadeDoPulo =  - 33;
+        somDoPulo.play();
 
-     let matrizValorEixoX = 0;
-     let matrizValorEixoY = 0;
-     let counter = 0;
-
-     for(var i = 0; i < 16; i++){
- 
-     /*Os valores do eixo Y se repetem até 4 vezes,
-     portanto sempre que o contador resetar é incrementado +270 que        em um loop de 16x a cada 4 posições do vetor o valor será            incrementado!Ex: 0-3:0, 4-7:270, 8-11:540, 12-15:810 */ 
-     if(counter == 4){
-     counter = 0;
-     matrizValorEixoY += 270;
-     } 
-
-     counter ++;
-     //Prevenir que os valores não passem do limite definido.
-     if(i>0) matrizValorEixoX += 220;
-     if(matrizValorEixoX > 660) matrizValorEixoX = 0;
-
-     this.matriz[i] = [matrizValorEixoX, matrizValorEixoY];
-      
+      }
+    
     }
-
-  }
   
-  exibe(){
-    let matrixEixoX = 0;
-    let matrixEixoY = 1;
-    let personagemPosicao = height -135;
-    let personagemLargura = 150;
-    let personagemAltura = 140;
+  aplicaGravidade(){
+   this.y = this.y + this.velocidadeDoPulo
+   this.velocidadeDoPulo = this.velocidadeDoPulo + this.gravidade;
     
-  image(
-    this.imagem,
-    0,
-    personagemPosicao,
-    personagemLargura,
-    personagemAltura,
-    this.matriz[this.frameAtual][matrixEixoX],
-    this.matriz[this.frameAtual][matrixEixoY],
-    220,270
-       );
-  
-    this.anima();
+    if(this.y > this.yInicial) {
+      this.y = this.yInicial;
+      this.counterPulo = 0;
+    }
   }
   
-  
-  
-  anima(){
-  this.frameAtual++;
+  estaColidindo(inimigo){
+     const precisao = .69;
+     const colisao = collideRectRect(
+     this.x,
+     this.y,
+     this.largura * precisao,
+     this.altura * precisao,
+     inimigo.x,
+     inimigo.y,
+     inimigo.largura * precisao,
+     inimigo.altura * precisao
+     );
     
-    if(this.frameAtual >= this.matriz.length -1){
-       this.frameAtual = 0;       
-       }
+    return colisao;
   }
-  
-  
   
 }
