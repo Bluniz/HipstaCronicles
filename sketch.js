@@ -111,7 +111,7 @@ function draw() {
   
   if (personagem.estaColidindo(inimigo)){
   somGameOver.play();
-  image(gameOverImage, 0, 200, width, 50)
+  image(gameOverImage, 0, 300, 350, 50)
   noLoop();
 
   }
