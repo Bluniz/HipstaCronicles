@@ -1,24 +1,31 @@
 class Cenario {
    constructor(imagem, velocidade){
    this.imagem = imagem;
+   
    this.velocidade = velocidade
    this.x1 = 0;
+   this.x11 = 0;
    this.x2 = width;
+   this.x22 = width;
   }
+  
   
   exibe(){
-    image(this.imagem, this.x1, 0, width, height); 
-    image(this.imagem, this.x2, 0, width, height);
-  }
+      
+    
+      image(this.imagem, this.x1, 0, width+1, height); 
+      image(this.imagem, this.x2, 0, width+1, height);
+      
+    }
+   
   
-  exibe2(){
-  image(this.imagem, this.x1, 0, 100, 100); 
-  image(this.imagem, this.x2, 0, 100, 100);
-  }
+  
   
   move(){
     this.x1 = this.x1 - this.velocidade;
     this.x2 = this.x2 - this.velocidade;  
+    
+    
     
     if(this.x1 < -width){
       this.x1 = width;
@@ -27,5 +34,6 @@ class Cenario {
     this.x2 = width;
     }
     
+  
   }
 }
