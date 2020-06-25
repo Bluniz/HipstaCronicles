@@ -190,6 +190,7 @@ function draw() {
   personagem.aplicaGravidade();
 
   
+<<<<<<< HEAD
   
   inimigos.forEach(inimigo => {
     inimigo.exibe();
@@ -198,10 +199,16 @@ function draw() {
     if (personagem.estaColidindo(inimigo)){
   somDoJogo.stop();
   //somGameOver.play();
-  image(gameOverImage, width/2 -200, height/3)
+  image(gameOverImage, width/2 -200, height/3);
+=======
+  if (personagem.estaColidindo(inimigo)){
+  somDoJogo.stop();
+  somGameOver.play();
+  image(gameOverImage, 150, 200, 400, 50)
+>>>>>>> be833d5b50a1e0fca60e60a07eb092437381a40a
   noLoop();
   }
-  });
+  }});
   
   
 }
