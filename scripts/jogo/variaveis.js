@@ -5,6 +5,8 @@ let imagemInimigoGrande;
 let imagemInimigoVoador;
 let gameOverImage;
 let imagemTelaInicial;
+let imagemVida;
+
 let fonteTelaInicial;
 
 let cenario = [];
@@ -20,7 +22,8 @@ let cenas;
 let jogo;
 let telaInicial;
 let botaoGerenciador;
-
+let vida;
+let fita;
 
 let somDoJogo;
 let somDoPulo;

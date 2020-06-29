@@ -1,6 +1,7 @@
 class Jogo{
   constructor(){
-    this.inimigoAtual = 0;
+    this.indice = 0;
+    this.mapa = fita.mapa;
     
   }
   
@@ -18,14 +19,14 @@ class Jogo{
   }
   
   pontuacao = new Pontuacao();
-  
+  vida =  new Vida(fita.configuracoes.vidaMaxima, fita.configuracoes.vidaInicial);
   personagem = new Personagem(matrizPersonagem, imagemPersonagem, 0,30, 110,135,220,270);
   
- const inimigo = new Inimigo(matrizInimigo,imagemInimigo,width -52, 30, 52,52,104,104,10, 100);
+ const inimigo = new Inimigo(matrizInimigo,imagemInimigo,width -52, 30, 52,52,104,104,10);
   
-  const inimigoGrande = new Inimigo(matrizInimigoGrande,   imagemInimigoGrande, width*2, 0, 200,200,400,400,15, 100);
+  const inimigoGrande = new Inimigo(matrizInimigoGrande,   imagemInimigoGrande, width*2, 0, 200,200,400,400,15);
   
-  const inimigoVoador = new Inimigo(matrizInimigoVoador, imagemInimigoVoador, width -52, 200, 100, 75, 200, 150,10, 100);
+  const inimigoVoador = new Inimigo(matrizInimigoVoador, imagemInimigoVoador, width -52, 200, 100, 75, 200, 150,10);
   
   inimigos.push(inimigo);
   inimigos.push(inimigoGrande);
@@ -46,32 +47,41 @@ class Jogo{
   cenario[i].move();
   }
   
+  vida.draw();
   pontuacao.exibe();
   pontuacao.adicionarPonto();
   
   personagem.exibe();
   personagem.aplicaGravidade();
   
-  const inimigo = inimigos[this.inimigoAtual];
+  const linhaAtual = this.mapa[this.indice];
+    
+  const inimigo = inimigos[linhaAtual.inimigo];
   const inimigoVisivel = inimigo.x < - inimigo.largura;
+
+    inimigo.velocidade = linhaAtual.velocidade;
 
     inimigo.exibe();
     inimigo.move();
   
   if(inimigoVisivel){
-     this.inimigoAtual++;
-    if(inimigoAtual > 2){
-     this.inimigoAtual = 0;
-    }
-    
-    inimigo.velocidade = parseInt(random(10,30));
+     this.indice++;
+    inimigo.aparece();
+    if(this.indice > this.mapa.lengh -1){
+     this.indice = 0;
+    }    
      }
     
     if (personagem.estaColidindo(inimigo)){
-  somDoJogo.stop();
-  somGameOver.play();
-  image(gameOverImage, width/2 -200, height/3)
-  noLoop();
+  vida.perdeVida();
+  personagem.ficaInvencivel();
+      
+  if(vida.vidas === 0){
+    somDoJogo.stop();
+    somGameOver.play();
+    image(gameOverImage, width/2 -200, height/3);
+    noLoop();
+      }
   }
   
  

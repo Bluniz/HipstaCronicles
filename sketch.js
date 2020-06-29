@@ -21,7 +21,7 @@ function keyPressed(){
 
 //Função para desenhar/renderizar o game
 function draw() {
-   cenas[cenaAtual].draw()
+   cenas[cenaAtual].draw();
 }
 
   
